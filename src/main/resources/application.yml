@@ -1,0 +1,40 @@
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  #DB
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    driver-class-name: org.postgresql.Driver
+    username: test01
+    password: test01
+  jpa:
+    properties:
+      hibernate:
+        format_sql:true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      # ddl-auto - @Entity
+
+  thymeleaf:
+    enabled: false
+  #JSP
+  devtools:
+    livereload:
+      enabled: true
+  #
+  logging:
+    level:
+      #
+      com.penthegom.example.penthegomdemo: DEBUG
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+      enabled: true
+server:
+  max-http-header-size: 40KB
+
+
