@@ -52,11 +52,13 @@
                         <th style="width: 10%">다운로드</th>
 
                     </tr>
+
                     <c:if test="${empty board}">
                         <tr>
                             <td colspan="6">검색결과가 없습니다.</td>
                         </tr>
                     </c:if>
+
                     <c:forEach varStatus="status" var="board" items="${board}">
                         <c:set var="src" value="play/${board.musicfile}"/>
                         <tr>

@@ -1,4 +1,4 @@
 package com.example.warproject.service;
 
-public class LoginServiceImpl {
+public class MemberService {
 }

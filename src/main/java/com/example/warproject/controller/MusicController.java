@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.Iterator;
-import java.util.List;
 
 
 @Slf4j
@@ -27,7 +26,7 @@ public class MusicController {
     private MusicService musicService;
 
     @RequestMapping("/upload")
-    public String Insert(MultipartHttpServletRequest request, Music m) throws Exception{
+    public String insert(MultipartHttpServletRequest request, Music m) throws Exception{
         Iterator<String> files = null;
         files = request.getFileNames();
 
@@ -38,35 +37,35 @@ public class MusicController {
             String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
             File destinationFile;
             String destinationFileName;
-            String mp3fileUrl = "C:/musicsource/";
-            String jpgfileUrl = "C:/imagesource/";
+            String mp3FileUrl = "C:/musicsource/";
+            String jpgFileUrl = "C:/imagesource/";
             System.out.println("----------"+formName);
 
             if(sourceFileNameExtension.equals("mp3")){
                 do {
                     destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
-                    destinationFile = new File(mp3fileUrl + destinationFileName);
+                    destinationFile = new File(mp3FileUrl + destinationFileName);
                 } while (destinationFile.exists());
 
                 destinationFile.getParentFile().mkdirs();
                 formFile.transferTo(destinationFile);
 
-                m.setMusicfile(destinationFileName);
-                m.setMusicorifile(sourceFileName);
-                m.setMusicurl(mp3fileUrl);
+                m.setMusic_file(destinationFileName);
+                m.setMusic_ori_file(sourceFileName);
+                m.setMusic_url(mp3FileUrl);
             }
             else {
                 do {
                     destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
-                    destinationFile = new File(jpgfileUrl + destinationFileName);
+                    destinationFile = new File(jpgFileUrl + destinationFileName);
                 } while (destinationFile.exists());
 
                 destinationFile.getParentFile().mkdirs();
                 formFile.transferTo(destinationFile);
 
-                m.setImgfile(destinationFileName);
-                m.setImgorifile(sourceFileName);
-                m.setImgurl(jpgfileUrl);
+                m.setImg_file(destinationFileName);
+                m.setImg_ori_file(sourceFileName);
+                m.setImg_url(jpgFileUrl);
             }
         }
         musicService.save(m);
@@ -103,7 +102,7 @@ public class MusicController {
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("pageNo", page);
         model.addAttribute("keyword", keyword);
-        model.addAttribute("musicselect", musicselect);
+        model.addAttribute("musicSelect", musicselect);
 
         return "boardsearch";
     }

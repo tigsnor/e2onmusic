@@ -20,22 +20,17 @@ import java.time.LocalDate;
 @Slf4j
 @Controller
 public class MemberController {
-    private MemberRepository member;
+    private MemberRepository memberRepository;
 
-    public MemberController(MemberRepository member) {
-        this.member = member;
+    public MemberController(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
-
-//    @RequestMapping("/login")
-//    public String login() {
-//        return "login";
-//    }
 
     //로그인
     @PostMapping("/login")
     public String signIn(HttpServletResponse response, HttpSession session, String id, String password) throws IOException {
         System.out.println("id : {} , pw : {}"+ id+ password);
-        Member member = this.member.findMember(id, password);
+        Member member = this.memberRepository.findMember(id, password);
 
         if(member != null) {
             String Id = member.getId();
@@ -81,7 +76,7 @@ public class MemberController {
     public String create(Member member) {
         System.out.println(member);
         member.setDate(LocalDate.now());
-        this.member.save(member);
+        this.memberRepository.save(member);
         return "redirect:/";
     }
 }

@@ -26,20 +26,20 @@ import java.nio.file.Paths;
 public class FileController {
 
     @GetMapping(value="/download")
-    public void download(HttpServletResponse response, HttpServletRequest request, HttpSession session) throws IOException {
+    public void download(HttpServletResponse response, HttpServletRequest request) throws IOException {
 
-        String filename = request.getParameter("filename");
-        String fileoriname = request.getParameter("fileoriname");
-        System.out.println(fileoriname);
-        String path = "C:/musicsource/" + filename;
+        String fileName = request.getParameter("filename");
+        String fileOriName = request.getParameter("fileoriname");
+        System.out.println(fileOriName);
+        String path = "C:/musicsource/" + fileName;
 
         byte[] fileByte = FileUtils.readFileToByteArray(new File(path));
 
-        String Encoding = URLEncoder.encode(
-                fileoriname, "UTF-8").replace("+", "%20");
+        String encoding = URLEncoder.encode(
+                fileOriName, "UTF-8").replace("+", "%20");
 
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; fileName="+Encoding);
+        response.setHeader("Content-Disposition", "attachment; fileName="+encoding);
         response.setHeader("Content-Transfer-Encoding", "binary");
 
         response.getOutputStream().write(fileByte);
@@ -50,11 +50,10 @@ public class FileController {
 
     @GetMapping(value="/play/{filename}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Resource> play(@PathVariable("filename") String filename){
-//        String filename = request.getParameter("filename");
+    public ResponseEntity<Resource> play(@PathVariable("filename") String fileName){
         String path = "C:/musicsource/";
 
-        Resource resource = new FileSystemResource(path + filename);
+        Resource resource = new FileSystemResource(path + fileName);
 
         if(!resource.exists()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -64,7 +63,7 @@ public class FileController {
         Path filePath = null;
 
         try{
-            filePath = Paths.get(path + filename);
+            filePath = Paths.get(path + fileName);
             headers.add("Content-Type", Files.probeContentType(filePath));
         } catch (IOException e) {
             e.printStackTrace();

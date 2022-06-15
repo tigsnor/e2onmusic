@@ -20,25 +20,24 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class Member {
+    @Column(name = "seq")
     @Id
     @GeneratedValue
     private long seq;
 
+    @Column(name = "id")
     @NotNull
     private String id;
+
+    @Column(name = "password")
     @NotNull
     private String password;
 
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "RegDate")
+    @Column(name = "reg_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    public Member(@NotNull String id, @NotNull String password, String name, int admin) {
-        this.id = id;
-        this.password = password;
-        this.name = name;
-        this.date = LocalDate.now();
-    }
 }
