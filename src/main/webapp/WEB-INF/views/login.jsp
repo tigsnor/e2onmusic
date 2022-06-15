@@ -32,7 +32,7 @@
             <div class="modal-body">
                 <div class="member_login">
 
-                    <form action=/login method="post">
+                    <form action=/login method="post" onsubmit="return loginForm(this);">
                         <div class="mb-3 mt-3">
                             <input type="text" class="form-control" name="id" placeholder="아이디" >
                         </div>
@@ -53,11 +53,6 @@
                     </form>
                 </div>
             </div>
-
-            <!-- Modal footer -->
-<%--                <div class="modal-footer">--%>
-<%--                    아이디와 비번이 다릅니다.--%>
-<%--                </div>--%>
         </div>
     </div>
 </div>
