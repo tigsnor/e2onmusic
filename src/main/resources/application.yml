@@ -34,6 +34,12 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
       enabled: true
+
+  security:
+    user:
+      name: tigsnor
+      password: 1234
+      roles: ADMIN
 server:
   max-http-header-size: 40KB
 

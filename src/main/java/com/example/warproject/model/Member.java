@@ -36,8 +36,14 @@ public class Member {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "role")
+    private String role;
+
     @Column(name = "reg_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
+    public void encodePassword(Member member) {
+        this.password = "{noop}" + member.getPassword();
+    }
 }
