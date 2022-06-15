@@ -65,7 +65,7 @@
                                     <td><button class="btn btn-primary" id="btnPlay${board.idx}" type="button" onclick="Mplay('${src}');">
                                         <i class="bi bi-play-fill"/>
                                     </button></td>
-                                    <td><button class="btn btn-primary" type="button" onclick="location.href='/download?filename=${board.musicfile}&fileoriname=${fn:replace(board.musicorifile, '&','%26')}'">
+                                    <td><button class="btn btn-primary" type="button" onclick="location.href='/download?filename=${board.musicfile}&fileoriname=${fn:replace(fn:replace(board.musicorifile, '&','%26'), '\'', '%27')}'">
                                         <i class="bi bi-arrow-down-circle-fill">
                                     </button></td>
                                 </c:otherwise>

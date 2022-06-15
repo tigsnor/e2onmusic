@@ -10,7 +10,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
+        function validateForm(form) {
+            if (form.musicf.value == "") {
+                alert("파일을 첨부하세요.");
+                form.musicf.focus();
+                return false;
+            }
+            if (form.imgf.value == "") {
+                alert("썸네일을 첨부하세요");
+                form.imgf.focus();
+                return false;
+            }
+            if (form.musicname.value == "") {
+                alert("썸네일을 첨부하세요");
+                form.musicname.focus();
+                return false;
+            }
+            if (form.albumname.value == "") {
+                alert("썸네일을 첨부하세요");
+                form.albumname.focus();
+                return false;
+            }
+            if (form.singer.value == "") {
+                alert("썸네일을 첨부하세요");
+                form.singer.focus();
+                return false;
+            }
+            if (form.date.value == "") {
+                alert("썸네일을 첨부하세요");
+                form.date.focus();
+                return false;
+            }
+        }
     </script>
 </head>
 <body>
@@ -34,12 +67,11 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="member_login">
-                    <form action="/upload" method="post" enctype="multipart/form-data">
+                    <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this);">
                         <div class="mb-3" align="left">
                             음원파일
                             <input type="file" class="form-control" name="musicf">
                         </div>
-
                         <div class="mb-3" align="left">
                             썸네일
                             <input type="file" class="form-control" name="imgf">
@@ -75,7 +107,6 @@
                         </div>
 
                         <div class="music_upload_btn">
-
                             <input type="submit" class="btn btn-secondary" id="btn-upload" value="업로드하기">
 
                             <button class="btn btn-light" type="button" data-bs-dismiss="modal">닫기</button>
@@ -86,10 +117,8 @@
             <!-- Modal footer -->
             <div class="modal-footer">
             </div>
-
         </div>
     </div>
 </div>
-
 </body>
 </html>
