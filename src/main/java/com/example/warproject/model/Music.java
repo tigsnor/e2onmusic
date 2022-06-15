@@ -24,30 +24,30 @@ public class Music {
 
     @Column(name = "musicfile")
     @NotNull
-    private String music_file;
+    private String musicFile;
 
     @Column(name = "musicorifile")
-    private String music_ori_file;
+    private String musicOriFile;
 
     @Column(name = "musicurl")
-    private String music_url;
+    private String musicUrl;
 
     @Column(name = "imgfile")
-    private String img_file;
+    private String imgFile;
 
     @Column(name = "imgorifile")
-    private String img_ori_file;
+    private String imgOriFile;
 
     @Column(name = "imgurl")
-    private String img_url;
+    private String imgUrl;
 
     @Column(name = "musicname")
     @NotNull
-    private String music_name;
+    private String musicName;
 
     @Column(name = "albumname")
     @NotNull
-    private String album_name;
+    private String albumName;
 
     @Column(name = "singer")
     @NotNull

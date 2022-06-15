@@ -50,9 +50,9 @@ public class MusicController {
                 destinationFile.getParentFile().mkdirs();
                 formFile.transferTo(destinationFile);
 
-                m.setMusic_file(destinationFileName);
-                m.setMusic_ori_file(sourceFileName);
-                m.setMusic_url(mp3FileUrl);
+                m.setMusicFile(destinationFileName);
+                m.setMusicOriFile(sourceFileName);
+                m.setMusicUrl(mp3FileUrl);
             }
             else {
                 do {
@@ -63,11 +63,12 @@ public class MusicController {
                 destinationFile.getParentFile().mkdirs();
                 formFile.transferTo(destinationFile);
 
-                m.setImg_file(destinationFileName);
-                m.setImg_ori_file(sourceFileName);
-                m.setImg_url(jpgFileUrl);
+                m.setImgFile(destinationFileName);
+                m.setImgOriFile(sourceFileName);
+                m.setImgUrl(jpgFileUrl);
             }
         }
+        System.out.println("--------------------컨트롤러"+m.toString());
         musicService.save(m);
 
         return "redirect:/";

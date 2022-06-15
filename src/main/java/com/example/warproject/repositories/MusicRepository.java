@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface MusicRepository extends CrudRepository<Music, Long> {
     Page<Music> findAll(Pageable pageable);
 
-    Page<Music> findByMusicnameContaining(String keyword, PageRequest pageable);
+    Page<Music> findByMusicNameContaining(String keyword, PageRequest pageable);
     Page<Music> findBySingerContaining(String keyword, PageRequest pageable);
 }

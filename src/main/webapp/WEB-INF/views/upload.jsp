@@ -78,11 +78,11 @@
                         </div>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="musicname" placeholder="음악 제목">
+                            <input type="text" class="form-control" name="musicName" placeholder="음악 제목">
                         </div>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="albumname" placeholder="앨범 제목">
+                            <input type="text" class="form-control" name="albumName" placeholder="앨범 제목">
                         </div>
 
                         <div class="mb-3">

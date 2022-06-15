@@ -17,7 +17,7 @@
                 <div class="member_view">
                     <div>
                         <div style="float: left; width: 40%">
-                            <img class="imag-fluid" style="width: fit-content" src="/picture/${board.imgfile}" class="rounded">
+                            <img class="imag-fluid" style="width: fit-content" src="/picture/${board.imgFile}" class="rounded">
                         </div>
                         <div style="float: left; width: 15%; font-weight: bold; font-size: 20px">
                             노래제목<br><br>
@@ -27,9 +27,9 @@
                             장르
                         </div>
                         <div id="test" style="float: left; width: 45%; font-size: 20px">
-                            ${board.musicname}<br><br>
+                            ${board.musicName}<br><br>
                             ${board.singer}<br><br>
-                            ${board.albumname}<br><br>
+                            ${board.albumName}<br><br>
                             ${board.date}<br><br>
                             ${board.genre}
                         </div>

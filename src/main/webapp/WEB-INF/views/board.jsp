@@ -60,11 +60,11 @@
                     </c:if>
 
                     <c:forEach varStatus="status" var="board" items="${board}">
-                        <c:set var="src" value="play/${board.musicfile}"/>
+                        <c:set var="src" value="play/${board.musicFile}"/>
                         <tr>
                             <td>${status.count}</td>
                             <td style="text-align: left"><a href data-bs-toggle="modal" data-bs-target="#viewmodal${board.idx}" data-notifyid="${board}">
-                                    ${board.musicname}</a></td>
+                                    ${board.musicName}</a></td>
                             <td>${board.singer}</td>
                             <td>${board.date}</td>
 
@@ -81,7 +81,7 @@
                                     <td><button class="btn btn-primary" id="btnPlay${board.idx}" type="button" onclick="Mplay('${src}');">
                                         <i class="bi bi-play-fill"/>
                                     </button></td>
-                                    <td><button class="btn btn-primary" type="button" onclick="location.href='/download?filename=${board.musicfile}&fileoriname=${fn:replace(fn:replace(board.musicorifile, '&','%26'), '\'', '%27')}'">
+                                    <td><button class="btn btn-primary" type="button" onclick="location.href='/download?filename=${board.musicFile}&fileoriname=${fn:replace(fn:replace(board.musicOriFile, '&','%26'), '\'', '%27')}'">
                                         <i class="bi bi-arrow-down-circle-fill">
                                     </button></td>
                                 </c:otherwise>

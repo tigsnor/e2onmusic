@@ -2,7 +2,9 @@ package com.example.warproject.controller;
 
 import com.example.warproject.model.Member;
 import com.example.warproject.repositories.MemberRepository;
+import com.example.warproject.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,17 +22,20 @@ import java.time.LocalDate;
 @Slf4j
 @Controller
 public class MemberController {
-    private MemberRepository memberRepository;
 
-    public MemberController(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+    @Autowired
+    private MemberService memberService;
+
+//    public MemberController(MemberService memberService) {
+//
+//        this. memberService = memberService;
+//    }
 
     //로그인
     @PostMapping("/login")
     public String signIn(HttpServletResponse response, HttpSession session, String id, String password) throws IOException {
         System.out.println("id : {} , pw : {}"+ id+ password);
-        Member member = this.memberRepository.findMember(id, password);
+        Member member = this.memberService.findMember(id, password);
 
         if(member != null) {
             String Id = member.getId();
@@ -76,7 +81,7 @@ public class MemberController {
     public String create(Member member) {
         System.out.println(member);
         member.setDate(LocalDate.now());
-        this.memberRepository.save(member);
+//        this.memberService.save(member);
         return "redirect:/";
     }
 }
