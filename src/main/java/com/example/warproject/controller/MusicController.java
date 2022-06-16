@@ -77,16 +77,20 @@ public class MusicController {
 
     //페이징처리
     @RequestMapping(value = {"/","board"})
-    public String paging(HttpSession session, Model model, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
+    public String paging(HttpSession session, Model model, Principal principal, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
 
         Page<Music> listPage = musicService.pagingMusic(page);
 
         int totalPage = listPage.getTotalPages();
 
+        if(!(principal == null)){
+            model.addAttribute("username",principal.getName());
+        }else{
+            model.addAttribute("username","1");
+        }
         model.addAttribute("board", listPage.getContent());
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("pageNo", page);
-        session.removeAttribute("result");
 
         return "board";
     }

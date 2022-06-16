@@ -36,7 +36,6 @@
 </head>
 <%@ include file="top.jsp" %>
 <body>
-
 <div class="container-fluid pt-5">
     <div class="row" style="margin-right: 20px; margin-left: 20px; margin-bottom: 100px">
         <%--    게시판 부분--%>
@@ -52,7 +51,6 @@
                         <th style="width: 10%">다운로드</th>
 
                     </tr>
-
                     <c:if test="${empty board}">
                         <tr>
                             <td colspan="6">검색결과가 없습니다.</td>
@@ -69,7 +67,7 @@
                             <td>${board.date}</td>
 
                             <c:choose>
-                                <c:when test="${empty member}">
+                                <c:when test="${'1'==username}">
                                     <td><button class="btn btn-primary" id="btnPlay${board.idx}" type="button" onclick="alert('로그인후 사용해주세요')">
                                         <i class="bi bi-play-fill"/>
                                     </button></td>
@@ -134,18 +132,15 @@
             </div>
         </div>
         <c:choose>
-            <c:when test="${empty member}">
+            <c:when test="${'1'== username}">
                 <div class="col-sm-2" align="center">
-                    <c:if test="${2 eq result}">
-                        <h5 style="color: red">아이디 비밀번호가 틀렸습니다.</h5>
-                    </c:if>
                     <%@ include file="login.jsp" %>
                     <%@ include file="join.jsp" %>
                 </div>
             </c:when>
             <c:otherwise>
                 <div class="col-sm-2" align="center">
-                    <h4>${member}님<br> 환영합니다!</h4>
+                    <h4>${username}님<br> 환영합니다!</h4>
                     <%@ include file="upload.jsp" %>
                     <button algin type="button" class="btn btn-danger" onclick="location.href='/logout'"
                         style="margin-top: 20px; width: 100px;" >

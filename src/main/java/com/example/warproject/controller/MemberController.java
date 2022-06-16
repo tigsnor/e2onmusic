@@ -3,36 +3,49 @@ package com.example.warproject.controller;
 import com.example.warproject.model.Member;
 import com.example.warproject.repositories.MemberRepository;
 import com.example.warproject.service.MemberService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@RestController
-@RequiredArgsConstructor
+
+@Controller
 public class MemberController {
 
-    private final MemberRepository memberRepository;
-    private final MemberService memberService;
-
-    @GetMapping("/member/{role}/username}/{password}")
-    public Member createAccount(@ModelAttribute Member member){
-        Member newMember = memberService.createNew(member);
-        return newMember;
-    }
+    @Autowired
+    private MemberRepository memberRepository;
+    @Autowired
+    private MemberService memberService;
 
     //회원가입
-    @PostMapping("/signup")
-    public String create(Member member) {
-        System.out.println(member);
-        member.setDate(LocalDate.now());
-//        this.memberService.save(member);
-        return "redirect:/";
+    //url로 받은 정보들을 Member 객체로 맵핑하여 MemberService에서 저장을 시켜준다.
+    @PostMapping("/user")
+    public String signup(Member member){
+        memberService.save(member);
+        return "redirect:/board";
     }
+
+    //로그아웃
+    @GetMapping(value = "/logout")
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response){
+        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        return "redirect:/board";
+    }
+
+//    //회원가입
+//    @PostMapping("/signup")
+//    public String create(Member member) {
+//        System.out.println(member);
+//        member.setDate(LocalDate.now());
+////        this.memberService.save(member);
+//        return "redirect:/";
+//    }
+//    @PostMapping("/login")
+
+
 }

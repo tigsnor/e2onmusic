@@ -18,8 +18,6 @@ public class MusicService {
 
     @Transactional
     public void save(Music music) {
-
-        System.out.println("--------------------------"+music.toString());
         musicRepository.save(music);
     }
 

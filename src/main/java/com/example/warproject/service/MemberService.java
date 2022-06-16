@@ -3,19 +3,23 @@ package com.example.warproject.service;
 import com.example.warproject.model.Member;
 import com.example.warproject.repositories.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Repository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.Optional;
 
-//UserDetailService 시큐리티에서 제공하는 인터페이스
+
+/*
+    @NonNull 어노테이션이 붙은 필드와 final로 선언된 필드들에 대해 생성자를 만들어낸다.
+    이를 통해 Constructor Injection이 가능하다.
+*/
 @Service
-public class MemberService implements UserDetailsService {
+public class MemberService implements UserDetailsService { //UserDetailService 시큐리티에서 제공하는 인터페이스
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private MemberRepository memberRepository;
 
@@ -28,22 +32,22 @@ public class MemberService implements UserDetailsService {
     UserDetails에 name, password, role를 주입시켜 생성한다.
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findAccountByUsername(username);
-        if(member == null){
-            throw new UsernameNotFoundException(username);
-        }
-
-        return User.builder()
-                .username(member.getName())
-                .password(member.getPassword())
-                .roles(member.getRole())
-                .build();
+    public Member loadUserByUsername(String username) throws UsernameNotFoundException {
+        return memberRepository.findAccountByUsername(username).orElseThrow(() -> new UsernameNotFoundException((username)));
+//        return User.builder()
+//                .username(member.getUsername())
+//                .password(member.getPassword())
+//                .roles(member.getRole())
+//                .build();
     }
 
-    public Member createNew(Member member){
-        member.encodePassword(member);
-        return this.memberRepository.save(member);
+    public Integer save(Member member){
+        member.encodePassword(passwordEncoder);//여기서 패스워드 인코딩
+
+        return memberRepository.save(Member.builder()
+            .username(member.getUsername())
+            .role(member.getRole())
+            .password(member.getPassword()).build()).getId();
     }
 
 //    @Transactional

@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function joinForm(form) {
-            if (form.id.value == "") {
+            if (form.username.value == "") {
                 alert("아이디를 입력하세요.");
                 form.id.focus();
                 return false;
@@ -20,11 +21,6 @@
             if (form.password.value == "") {
                 alert("비밀번호를 입력하세요");
                 form.password.focus();
-                return false;
-            }
-            if (form.name.value == "") {
-                alert("이름을 입력하세요");
-                form.name.focus();
                 return false;
             }
         }
@@ -51,18 +47,16 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="member_login">
-                    <form action="/signup" method="post" onsubmit="return joinForm(this);">
+                    <form action="/user" method="POST" onsubmit="return joinForm(this);">
                         <div class="mb-3 mt-3">
-                            <input type="text" class="form-control" name="id" placeholder="아이디" >
+                            <input type="hidden" name="role" value="USER">
+                            <input type="text" class="form-control" name="username" placeholder="아이디" >
                         </div>
 
                         <div class="mb-3">
                             <input type="password" class="form-control" name="password" placeholder="비밀번호">
                         </div>
 
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="name" placeholder="이름">
-                        </div>
 
                         <div class="member_login_btn">
 

@@ -1,49 +1,75 @@
 package com.example.warproject.model;
 
-import com.sun.istack.NotNull;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
 @Setter
-public class Member {
-    @Column(name = "seq")
+public class Member implements UserDetails {
+
     @Id
     @GeneratedValue
-    private long seq;
-
     @Column(name = "id")
-    @NotNull
-    private String id;
+    private Integer id;
+
+    @Column(name = "username", unique = true)
+    private String username;
 
     @Column(name = "password")
-    @NotNull
     private String password;
-
-    @Column(name = "name")
-    private String name;
 
     @Column(name = "role")
     private String role;
 
-    @Column(name = "reg_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    @Builder
+    public Member(String username, String password, String role){
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(this.password);
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> roles = new HashSet<>();
+        for (String role : role.split(",")) {
+            roles.add(new SimpleGrantedAuthority(role));
+        }
+        return roles;
+    }
 
-    public void encodePassword(Member member) {
-        this.password = "{noop}" + member.getPassword();
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

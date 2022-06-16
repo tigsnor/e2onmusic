@@ -32,9 +32,9 @@
             <div class="modal-body">
                 <div class="member_login">
 
-                    <form action=/login method="post" onsubmit="return loginForm(this);">
+                    <form action=/login1 method="post" onsubmit="return loginForm(this);">
                         <div class="mb-3 mt-3">
-                            <input type="text" class="form-control" name="id" placeholder="아이디" >
+                            <input type="text" class="form-control" name="username" placeholder="아이디" >
                         </div>
 
                         <div class="mb-3">
