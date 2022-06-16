@@ -51,13 +51,11 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .formLogin() //security가 제공하는 기본적인 로그인 화면, 로그인 기능, 로그아웃 기능을 제공한다.
                     .loginPage("/") //로그인 페이지 링크
-                    .usernameParameter("username")
-                    .passwordParameter("password")
                     .loginProcessingUrl("/login1").defaultSuccessUrl("/board")// 로그인 성공 후 리다이렉트 주소
                 .and()
                 .exceptionHandling()
-                    .authenticationEntryPoint(authenticationEntryPointHandler)
-                    .accessDeniedHandler(webAccessDeniedHandler)
+                    .authenticationEntryPoint(authenticationEntryPointHandler)//토큰확인
+                    .accessDeniedHandler(webAccessDeniedHandler)//에러확인
                 .and()
                 .logout()//로그아웃
                     .logoutSuccessUrl("/")
