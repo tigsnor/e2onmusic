@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 
 /*
     @NonNull 어노테이션이 붙은 필드와 final로 선언된 필드들에 대해 생성자를 만들어낸다.
@@ -34,20 +32,16 @@ public class MemberService implements UserDetailsService { //UserDetailService �
     @Override
     public Member loadUserByUsername(String username) throws UsernameNotFoundException {
         return memberRepository.findAccountByUsername(username).orElseThrow(() -> new UsernameNotFoundException((username)));
-//        return User.builder()
-//                .username(member.getUsername())
-//                .password(member.getPassword())
-//                .roles(member.getRole())
-//                .build();
+
     }
 
-    public Integer save(Member member){
+    public Member save(Member member){
         member.encodePassword(passwordEncoder);//여기서 패스워드 인코딩
 
         return memberRepository.save(Member.builder()
             .username(member.getUsername())
             .role(member.getRole())
-            .password(member.getPassword()).build()).getId();
+            .password(member.getPassword()).build());
     }
 
 //    @Transactional

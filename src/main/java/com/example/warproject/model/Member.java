@@ -11,9 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -44,13 +42,17 @@ public class Member implements UserDetails {
     public void encodePassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(this.password);
     }
+
+    /*
+    사용자의 권한을 콜렉션 형태로 반환
+    getAuthorities() 메소드를 통하여 인증받은 사용자의 authorities를 조회할수있다
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> roles = new HashSet<>();
-        for (String role : role.split(",")) {
-            roles.add(new SimpleGrantedAuthority(role));
-        }
-        return roles;
+        List<GrantedAuthority> authorityList = new ArrayList<GrantedAuthority>();
+        authorityList.add(new SimpleGrantedAuthority(role));
+
+        return authorityList;
     }
 
     @Override

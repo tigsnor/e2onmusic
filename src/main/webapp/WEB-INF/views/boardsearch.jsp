@@ -53,7 +53,7 @@
                             <td>${board.singer}</td>
                             <td>${board.date}</td>
                             <c:choose>
-                                <c:when test="${empty member}">
+                                <c:when test="${'1'==username}">
                                     <td><button class="btn btn-primary" id="btnPlay${board.idx}" type="button" onclick="alert('로그인후 사용해주세요')">
                                         <i class="bi bi-play-fill"/>
                                     </button></td>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//서버에 요청을 할 때 액섹스가 가능한지 권한을 체크후 액세스 할 수 없는 요청을 했을시 동작된다.
 @Component
 public class WebAccessDeniedHandler implements AccessDeniedHandler {
     @Override

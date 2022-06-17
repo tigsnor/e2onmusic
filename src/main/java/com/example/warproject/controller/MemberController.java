@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberController {
 
     @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
     private MemberService memberService;
 
     //회원가입
@@ -36,16 +34,4 @@ public class MemberController {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/board";
     }
-
-//    //회원가입
-//    @PostMapping("/signup")
-//    public String create(Member member) {
-//        System.out.println(member);
-//        member.setDate(LocalDate.now());
-////        this.memberService.save(member);
-//        return "redirect:/";
-//    }
-//    @PostMapping("/login")
-
-
 }
