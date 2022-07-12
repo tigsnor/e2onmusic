@@ -9,12 +9,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class MusicService {
 
     @Autowired
     private MusicRepository musicRepository;
+
+//    public List<Music> getMusic(Music music){
+//        List<Music> musicBoard = musicRepository.findAll()
+//    }
 
     @Transactional
     public void save(Music music) {
@@ -23,7 +28,7 @@ public class MusicService {
 
     @Transactional
     public Page<Music> pagingMusic(int page) {
-        return musicRepository.findAll(PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "idx")));
+        return musicRepository.findAll(PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "idx")));
     }
 
     @Transactional
